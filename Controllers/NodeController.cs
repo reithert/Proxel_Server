@@ -24,8 +24,13 @@ public class NodeController : ControllerBase
 
     [HttpGet]
     public List<Node> GetNodes() {
-
         return _nodes;
+    }
+
+    [HttpPost]
+    public Request ExecuteRequest(Request request) {
+        request.Payload += ":::EXECUTED";
+        return request;
     }
 
 
