@@ -18,6 +18,7 @@ public class NodeController : ControllerBase
     {
         _logger = logger;
         _hubContext = hubContext;
+        Console.WriteLine("Server Initialized.");
 
     }
 
