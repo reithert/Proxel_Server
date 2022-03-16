@@ -18,8 +18,6 @@ public class NodeController : ControllerBase
     {
         _logger = logger;
         _hubContext = hubContext;
-        Console.WriteLine("Server Initialized.");
-
     }
 
     [HttpGet]
@@ -30,6 +28,7 @@ public class NodeController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Response>> ExecuteRequest(Request request) {
         if(!NodeBase.NodeExists(request.HostName)) {
+            await _hubContext.Clients.All.SendAsync("PrintOutput", "ERR: Requested node is not connected!");
             return new Response("Requested Node is not connected.");
         }
         Node node = NodeBase.GetNode(request.HostName);

@@ -21,7 +21,9 @@ public class NodeHub : Hub {
     }
 
     public override async Task OnDisconnectedAsync(Exception? exception) {
+        Node node = NodeBase.GetNode(Context.ConnectionId);
         NodeBase.RemoveNode(Context.ConnectionId);
+        await Clients.All.SendAsync("PrintOutput", "Node Disconnected: " + node.HostName);
         await Groups.RemoveFromGroupAsync(Context.ConnectionId, "SignalR Users");
         await base.OnDisconnectedAsync(exception);
     }

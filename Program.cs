@@ -39,7 +39,7 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseCors(builder => {
-    builder.WithOrigins("http://localhost:4200", "https://prxel.tjjr.dev/", "https://proxel.tjjr.dev/")
+    builder.WithOrigins("http://localhost:4200", "https://prxel.tjjr.dev", "https://proxel.tjjr.dev")
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials();
