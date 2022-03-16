@@ -26,12 +26,16 @@ public class NodeBase {
     // }
 
     public static void AddNode(Node node) {
+        Console.WriteLine("Node Connected: " + node.HostName);
         _nodes.AddOrUpdate(node.ConnectionID, node, (k, v) => v = node);
     }
 
     public static void RemoveNode(string name) {
         Node? node;
         _nodes.TryRemove(name, out node);
+        if(node != null) {
+            Console.WriteLine("Node Disconnected: " + node.HostName);
+        }
     }
 
     public static bool NodeExists(string connectionID) {
