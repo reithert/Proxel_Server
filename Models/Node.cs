@@ -1,6 +1,11 @@
-namespace Proxel_Server.Models;
+using System.ComponentModel.DataAnnotations;
 
+namespace Proxel_Server.Models;
 public class Node {
+
+    public Node() {
+
+    }
 
     public Node(string connectionID, SystemInfo sysInfo) {
         this.ConnectionID = connectionID;
@@ -15,8 +20,9 @@ public class Node {
         this.HostName = hostname;
     }
 
-    public string ConnectionID {get;}
-    public string OS {get;}
-    public string HostName{get;}
+    [Key]
+    public string ConnectionID {get; set;}
+    public string OS {get; set;}
+    public string HostName{get; set;}
     public string Output{get; set;} = "No output receieved.";
 }

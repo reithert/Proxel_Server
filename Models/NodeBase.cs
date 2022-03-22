@@ -1,10 +1,13 @@
 namespace Proxel_Server.Models;
 using System.Collections.Concurrent;
+using Microsoft.EntityFrameworkCore;
+
 
 public class NodeBase {
 
     private static ConcurrentDictionary<string, Node> _nodes
      = new ConcurrentDictionary<string, Node>();
+    private static DbContext _db = new NodeLog();
     public static Node GetNode(string connectionID) {
         Node? node;
         _nodes.TryGetValue(connectionID, out node);
@@ -26,7 +29,10 @@ public class NodeBase {
     // }
 
     public static void AddNode(Node node) {
+
         Console.WriteLine("Node Connected: " + node.HostName);
+        _db.Add(node);
+        _db.SaveChanges();
         _nodes.AddOrUpdate(node.ConnectionID, node, (k, v) => v = node);
     }
 
