@@ -11,6 +11,13 @@ public class NodeHub : Hub {
     }
 
     public void ConnectToServer(SystemInfo nodeInfo) {
+        try {
+            System.Net.IPAddress? ip = Context.GetHttpContext().Connection.RemoteIpAddress;
+            Console.WriteLine(ip.MapToIPv6().ToString());
+            Console.WriteLine(ip.MapToIPv4().ToString());
+        } catch (NullReferenceException e) {
+
+        }
         Node node = new Node(Context.ConnectionId, nodeInfo);
         NodeBase.AddNode(node);
     }
